@@ -1,7 +1,13 @@
-import React from "react";
 import css from "./header.module.scss";
 import logo from "../../../assets/pokemon.png";
-export default function Header() {
+import * as FaIcons from "react-icons/fa";
+import { FC } from "react";
+
+interface HeaderProps {
+  getSearch: (value: string) => void;
+}
+
+const Header: FC<HeaderProps> = ({ getSearch }) => {
   return (
     <nav className={css.header}>
       <div className={css.div_header}>
@@ -9,9 +15,18 @@ export default function Header() {
           <img src={logo} alt="logo" />
         </div>
         <div className={css.div_search}>
-          <input type="search" name="" id="" />
+          <div>
+            <FaIcons.FaSearch />
+          </div>
+          <input
+            type="search"
+            placeholder="Escribe el nombre de tu pokemon favorito"
+            onChange={(e) => getSearch(e.target.value)}
+          />
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Header;
